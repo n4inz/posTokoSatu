@@ -51,7 +51,7 @@
                         <td>: {{ $supplier->telepon }}</td>
                     </tr>
                     <tr>
-                        <td>Alamat</td>
+                        <td>Alamat/Wilayah</td>
                         <td>: {{ $supplier->alamat }}</td>
                     </tr>
                 </table>

@@ -43,6 +43,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/produk/delete-selected', [ProdukController::class, 'deleteSelected'])->name('produk.delete_selected');
         Route::post('/produk/cetak-barcode', [ProdukController::class, 'cetakBarcode'])->name('produk.cetak_barcode');
         Route::resource('/produk', ProdukController::class);
+        Route::get('/produk-kritis', [ProdukController::class, 'kritis'])->name('produk.kritis');
+        Route::get('/produk-riwayat', [ProdukController::class, 'riwayatStok'])->name('produk.riwayat');
+        Route::get('/riwayat-data', [ProdukController::class, 'riwayatData'])->name('produk.riwayatData');
 
         Route::get('/member/data', [MemberController::class, 'data'])->name('member.data');
         Route::post('/member/cetak-member', [MemberController::class, 'cetakMember'])->name('member.cetak_member');

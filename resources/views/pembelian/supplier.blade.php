@@ -12,7 +12,7 @@
                         <th width="5%">No</th>
                         <th>Nama</th>
                         <th>Telepon</th>
-                        <th>Alamat</th>
+                        <th>Alamat/Wilayah</th>
                         <th><i class="fa fa-cog"></i></th>
                     </thead>
                     <tbody>

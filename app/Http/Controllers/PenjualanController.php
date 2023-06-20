@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Penjualan;
 use App\Models\PenjualanDetail;
 use App\Models\Produk;
+use App\Models\RiwayatStok;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use PDF;
@@ -92,6 +93,11 @@ class PenjualanController extends Controller
             $produk = Produk::find($item->id_produk);
             $produk->stok -= $item->jumlah;
             $produk->update();
+
+            RiwayatStok::create([
+                'body' => 'Produk ' . $produk->nama_produk . ' telah terjual sebanyak ' . $item->jumlah
+            ]);
+
         }
 
         return redirect()->route('transaksi.selesai');

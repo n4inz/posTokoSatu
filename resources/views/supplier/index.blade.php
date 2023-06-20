@@ -22,7 +22,7 @@
                         <th width="5%">No</th>
                         <th>Nama</th>
                         <th>Telepon</th>
-                        <th>Alamat</th>
+                        <th>Wilayah</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
                 </table>

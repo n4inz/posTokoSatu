@@ -1,6 +1,7 @@
-<header class="main-header">
+
+<header   class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a style="background: #96b0bc;"  href="index2.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         @php
             $words = explode(' ', $setting->nama_perusahaan);
@@ -14,9 +15,9 @@
         <span class="logo-lg"><b>{{ $setting->nama_perusahaan }}</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
+    <nav style="background: #96b0bc;" class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <a onmouseover="this.style.background='#96b0bc';" onmouseout="this.style.background='#96b0bc';" href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
 

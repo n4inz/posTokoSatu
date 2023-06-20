@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="alamat" class="col-lg-2 col-lg-offset-1 control-label">Alamat</label>
+                        <label for="alamat" class="col-lg-2 col-lg-offset-1 control-label">Alamat/Wilayah</label>
                         <div class="col-lg-6">
                             <textarea name="alamat" id="alamat" rows="3" class="form-control"></textarea>
                             <span class="help-block with-errors"></span>

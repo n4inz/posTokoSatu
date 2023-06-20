@@ -1,7 +1,17 @@
 @extends('layouts.master')
 
 @section('title')
+    @if (request()->is('produk-kritis'))
+    Produk Kritis
+    @php
+        $status = 'kritis'
+    @endphp
+    @else
+    @php
+        $status = 'normal'
+    @endphp
     Daftar Produk
+    @endif
 @endsection
 
 @section('breadcrumb')
@@ -59,6 +69,7 @@
             autoWidth: false,
             ajax: {
                 url: '{{ route('produk.data') }}',
+                data:{status: '{{ $status }}'}
             },
             columns: [
                 {data: 'select_all', searchable: false, sortable: false},

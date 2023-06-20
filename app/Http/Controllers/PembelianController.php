@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pembelian;
 use App\Models\PembelianDetail;
 use App\Models\Produk;
+use App\Models\RiwayatStok;
 use App\Models\Supplier;
 
 class PembelianController extends Controller
@@ -84,6 +85,12 @@ class PembelianController extends Controller
             $produk = Produk::find($item->id_produk);
             $produk->stok += $item->jumlah;
             $produk->update();
+
+
+            RiwayatStok::create([
+                'body' => 'Produk ' . $produk->nama_produk . ' telah ditambahkan ke etalase sebanyak ' . $item->jumlah . ' buah melalui suplier'
+            ]);
+
         }
 
         return redirect()->route('pembelian.index');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use App\Models\Produk;
+use App\Models\RiwayatStok;
 use PDF;
 
 class ProdukController extends Controller
@@ -21,12 +22,25 @@ class ProdukController extends Controller
         return view('produk.index', compact('kategori'));
     }
 
-    public function data()
+    public function kritis()
     {
-        $produk = Produk::leftJoin('kategori', 'kategori.id_kategori', 'produk.id_kategori')
+        $kategori = Kategori::all()->pluck('nama_kategori', 'id_kategori');
+
+        return view('produk.index', compact('kategori'));
+    }
+
+    public function data(Request $request)
+    {
+
+        $query = Produk::leftJoin('kategori', 'kategori.id_kategori', 'produk.id_kategori')
             ->select('produk.*', 'nama_kategori')
-            ->orderBy('kode_produk', 'asc')
-            ->get();
+            ->orderBy('kode_produk', 'asc');
+        
+        if($request->status == 'kritis'){
+            $query->where('stok' , '<', 5);
+        }
+
+        $produk = $query->get();
 
         return datatables()
             ->of($produk)
@@ -82,7 +96,9 @@ class ProdukController extends Controller
         $request['kode_produk'] = 'P'. tambah_nol_didepan((int)$produk->id_produk +1, 6);
 
         $produk = Produk::create($request->all());
-
+        RiwayatStok::create([
+            'body' => 'Produk ' . $request->nama_produk . ' telah ditambahkan ke etalase sebanyak ' . $request->stok . ' buah'
+        ]);
         return response()->json('Data berhasil disimpan', 200);
     }
 
@@ -136,6 +152,11 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
         $produk->delete();
 
+
+        RiwayatStok::create([
+            'body' => 'Produk ' . $produk->nama_produk . ' Telah dihapus di etalase'
+        ]);
+
         return response(null, 204);
     }
 
@@ -161,5 +182,34 @@ class ProdukController extends Controller
         $pdf = PDF::loadView('produk.barcode', compact('dataproduk', 'no'));
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('produk.pdf');
+    }
+
+
+    public function riwayatStok()
+    {
+        $kategori = Kategori::all()->pluck('nama_kategori', 'id_kategori');
+        return view('produk.riwayat_produk', compact('kategori'));
+    }
+
+    public function riwayatData(Request $request)
+    {
+        $query = RiwayatStok::query()->orderBy('id','desc');
+
+        $produk = $query->get();
+
+        return datatables()
+            ->of($produk)
+            ->addIndexColumn()
+            ->addColumn('select_all', function ($produk) {
+                return '
+                    <input type="checkbox" name="id_produk[]" value="'. $produk->id_produk .'">
+                ';
+            })
+            ->addColumn('kode_produk', function ($produk) {
+                return  $produk->body;
+            })
+           
+            ->rawColumns(['aksi', 'kode_produk', 'select_all'])
+            ->make(true);
     }
 }
