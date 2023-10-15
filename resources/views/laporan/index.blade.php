@@ -86,7 +86,7 @@
     $('#select-day').change(function() {
     var val = $(this).val();
     var currentDate = new Date().toISOString().split('T')[0]; // Mendapatkan tanggal saat ini dalam format "YYYY-MM-DD"
-    var newUrl = 'http://127.0.0.1:8000/laporan?';
+    var newUrl = 'http://toko-bangunan.navbar.my.id/laporan?';
 
     if (val == 'harian') {
         newUrl += 'tanggal_awal=' + currentDate + '&tanggal_akhir=' + currentDate;
