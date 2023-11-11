@@ -19,7 +19,7 @@ class PenjualanSeeder extends Seeder
         $faker = Faker::create();
 
         for ($i = 0; $i < 30; $i++) {
-            $createdAt = Carbon::now(1)->subDays($i);
+            $createdAt = Carbon::now()->subMonth(1)->subDays($i);
             
             // if ($i % 3 === 0) {
             //     // Tahunan
@@ -48,7 +48,7 @@ class PenjualanSeeder extends Seeder
         }
 
         for ($i = 0; $i < 30; $i++) {
-            $createdAt = Carbon::now(2)->subDays($i);
+            $createdAt = Carbon::now()->subMonth(2)->subDays($i);
             
             // if ($i % 3 === 0) {
             //     // Tahunan
@@ -77,7 +77,7 @@ class PenjualanSeeder extends Seeder
         }
 
         for ($i = 0; $i < 30; $i++) {
-            $createdAt = Carbon::now(3)->subDays($i);
+            $createdAt = Carbon::now()->subMonth(3)->subDays($i);
             
             // if ($i % 3 === 0) {
             //     // Tahunan
@@ -106,37 +106,7 @@ class PenjualanSeeder extends Seeder
         }
     
         for ($i = 0; $i < 30; $i++) {
-            $createdAt = Carbon::now(4)->subDays($i);
-            
-            // if ($i % 3 === 0) {
-            //     // Tahunan
-            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' years');
-            // } elseif ($i % 2 === 0) {
-            //     // Bulanan
-            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' months');
-            // } else {
-            //     // Harian
-            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' days');
-            // }
-    
-            $bayar = $faker->numberBetween(10000, 50000);
-    
-            DB::table('penjualan')->insert([
-                'id_member' => null,
-                'total_item' => $faker->numberBetween(1, 10),
-                'total_harga' => $bayar,
-                'diskon' => 0,
-                'bayar' => $bayar,
-                'diterima' => $bayar,
-                'id_user' => 1,
-                'created_at' => $createdAt,
-                'updated_at' => $faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),
-            ]);
-        }
-
-
-        for ($i = 0; $i < 30; $i++) {
-            $createdAt = Carbon::now(5)->subDays($i);
+            $createdAt = Carbon::now()->subMonth(4)->subDays($i);
             
             // if ($i % 3 === 0) {
             //     // Tahunan
@@ -166,36 +136,7 @@ class PenjualanSeeder extends Seeder
 
 
         for ($i = 0; $i < 30; $i++) {
-            $createdAt = Carbon::now(6)->subDays($i);
-            
-            // if ($i % 3 === 0) {
-            //     // Tahunan
-            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' years');
-            // } elseif ($i % 2 === 0) {
-            //     // Bulanan
-            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' months');
-            // } else {
-            //     // Harian
-            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' days');
-            // }
-    
-            $bayar = $faker->numberBetween(10000, 50000);
-    
-            DB::table('penjualan')->insert([
-                'id_member' => null,
-                'total_item' => $faker->numberBetween(1, 10),
-                'total_harga' => $bayar,
-                'diskon' => 0,
-                'bayar' => $bayar,
-                'diterima' => $bayar,
-                'id_user' => 1,
-                'created_at' => $createdAt,
-                'updated_at' => $faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),
-            ]);
-        }
-
-        for ($i = 0; $i < 30; $i++) {
-            $createdAt = Carbon::now(7)->subDays($i);
+            $createdAt = Carbon::now()->subMonth(5)->subDays($i);
             
             // if ($i % 3 === 0) {
             //     // Tahunan
@@ -225,7 +166,7 @@ class PenjualanSeeder extends Seeder
 
 
         for ($i = 0; $i < 30; $i++) {
-            $createdAt = Carbon::now(8)->subDays($i);
+            $createdAt = Carbon::now()->subMonth(6)->subDays($i);
             
             // if ($i % 3 === 0) {
             //     // Tahunan
@@ -254,7 +195,7 @@ class PenjualanSeeder extends Seeder
         }
 
         for ($i = 0; $i < 30; $i++) {
-            $createdAt = Carbon::now(9)->subDays($i);
+            $createdAt = Carbon::now()->subMonth(7)->subDays($i);
             
             // if ($i % 3 === 0) {
             //     // Tahunan
@@ -284,7 +225,66 @@ class PenjualanSeeder extends Seeder
 
 
         for ($i = 0; $i < 30; $i++) {
-            $createdAt = Carbon::now(10)->subDays($i);
+            $createdAt = Carbon::now()->subMonth(8)->subDays($i);
+            
+            // if ($i % 3 === 0) {
+            //     // Tahunan
+            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' years');
+            // } elseif ($i % 2 === 0) {
+            //     // Bulanan
+            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' months');
+            // } else {
+            //     // Harian
+            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' days');
+            // }
+    
+            $bayar = $faker->numberBetween(10000, 50000);
+    
+            DB::table('penjualan')->insert([
+                'id_member' => null,
+                'total_item' => $faker->numberBetween(1, 10),
+                'total_harga' => $bayar,
+                'diskon' => 0,
+                'bayar' => $bayar,
+                'diterima' => $bayar,
+                'id_user' => 1,
+                'created_at' => $createdAt,
+                'updated_at' => $faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),
+            ]);
+        }
+
+        for ($i = 0; $i < 30; $i++) {
+            $createdAt = Carbon::now()->subMonth(9)->subDays($i);
+            
+            // if ($i % 3 === 0) {
+            //     // Tahunan
+            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' years');
+            // } elseif ($i % 2 === 0) {
+            //     // Bulanan
+            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' months');
+            // } else {
+            //     // Harian
+            //     $createdAt = $createdAt->copy()->modify('-' . $i . ' days');
+            // }
+    
+            $bayar = $faker->numberBetween(10000, 50000);
+    
+            DB::table('penjualan')->insert([
+                'id_member' => null,
+                'total_item' => $faker->numberBetween(1, 10),
+                'total_harga' => $bayar,
+                'diskon' => 0,
+                'bayar' => $bayar,
+                'diterima' => $bayar,
+                'id_user' => 1,
+                'created_at' => $createdAt,
+                'updated_at' => $faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),
+            ]);
+        }
+
+
+        for ($i = 0; $i < 30; $i++) {
+            $createdAt = Carbon::now()->subMonth(10)->subDays($i);
             
             // if ($i % 3 === 0) {
             //     // Tahunan
