@@ -12,6 +12,7 @@ class LaporanController extends Controller
 {
     public function index(Request $request)
     {
+        return Penjualan::query()->get();
         $tanggalAwal = date('Y-m-d', mktime(0, 0, 0, date('m'), 1, date('Y')));
         $tanggalAkhir = date('Y-m-d');
 
