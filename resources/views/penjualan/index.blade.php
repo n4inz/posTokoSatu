@@ -1,9 +1,7 @@
 @extends('layouts.master')
-
 @section('title')
     Daftar Penjualan
 @endsection
-
 @section('breadcrumb')
     @parent
     <li class="active">Daftar Penjualan</li>
@@ -18,6 +16,8 @@
                     <thead>
                         <th width="5%">No</th>
                         <th>Tanggal</th>
+                        <th>Kode Transaksi</th>
+                        <th>Kode Barang</th>
                         <th>Kode Member</th>
                         <th>Total Item</th>
                         <th>Total Harga</th>
@@ -49,6 +49,8 @@
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'tanggal'},
+                {data: 'kode_transaksi'},
+                {data: 'kode_barang'},
                 {data: 'kode_member'},
                 {data: 'total_item'},
                 {data: 'total_harga'},

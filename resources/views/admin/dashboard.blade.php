@@ -80,7 +80,14 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Grafik Penjualan 2019 s/d 2024</h3>
-
+                <select name="" id="change_grafik">
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
                 {{-- <h3 class="box-title">Grafik Penjualan {{ tanggal_indonesia($tanggal_awal, false) }} s/d {{ tanggal_indonesia($tanggal_akhir, false) }}</h3> --}}
             </div>
             <!-- /.box-header -->
@@ -147,25 +154,44 @@ $(function() {
 
 });
 
+    function generateRandomData(min, max, length) {
+        var data = [];
+        for (var i = 0; i < length; i++) {
+            data.push(Math.floor(Math.random() * (max - min + 1)) + min);
+        }
+        return data;
+    }
+
+    // Objek untuk menyimpan data grafik
+    var chartData = {
+        '2019': generateRandomData(5000000, 30000000, 12), // Data acak antara 5 juta dan 30 juta untuk setiap bulan
+        '2020': generateRandomData(5000000, 31000000, 12),
+        '2021': generateRandomData(6000000, 32000000, 12),
+        '2022': generateRandomData(6000000, 33000000, 12),
+        '2023': generateRandomData(7000000, 34000000, 12),
+        '2024': generateRandomData(7000000, 35000000, 12)
+    };
+    
     const ctx = document.getElementById('salesChart');
 
-    new Chart(ctx, {
+    var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul' ,'Agus', 'Sept' ,'Okt' ,'Nov', 'Dec'],
             datasets: [{
-            label: 'Penjualan',
-            data: [20000000, 23000000, 18000000, 15000000, 30000000, 5000000],
-            borderWidth: 1
+                label: 'Penjualan',
+                data: chartData['2019'], // Data untuk tahun 2019
+                borderWidth: 1
             }]
         },
-        options: {
-            scales: {
-            y: {
-                beginAtZero: true
-            }
-            }
-        }
+        
+    });
+
+    var selectElement = document.getElementById('change_grafik');
+    selectElement.addEventListener('change', function() {
+        var selectedYear = selectElement.value;
+        myChart.data.datasets[0].data = chartData[selectedYear];
+        myChart.update();
     });
 
 </script>

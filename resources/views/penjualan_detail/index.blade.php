@@ -125,6 +125,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="kembali" class="col-lg-2 control-label">Kembali</label>
+                                <input type="hidden" id="kembali_int">
                                 <div class="col-lg-8">
                                     <input type="text" id="kembali" name="kembali" class="form-control" value="0" readonly>
                                 </div>
@@ -230,6 +231,14 @@
         });
 
         $('.btn-simpan').on('click', function () {
+            var kembali = $('#kembali_int').val();
+
+            if (kembali < 0) {
+                alert('Uang Tidak Cukup Untuk Melanjutkan Transaksi !!!')
+
+                return false;
+            }
+            
             $('.form-penjualan').submit();
         });
     });
@@ -305,7 +314,7 @@
                 $('#bayar').val(response.bayar);
                 $('.tampil-bayar').text('Bayar: Rp. '+ response.bayarrp);
                 $('.tampil-terbilang').text(response.terbilang);
-
+                $('#kembali_int').val(response.kembalirp);
                 $('#kembali').val('Rp.'+ response.kembalirp);
                 if ($('#diterima').val() != 0) {
                     $('.tampil-bayar').text('Kembali: Rp. '+ response.kembalirp);

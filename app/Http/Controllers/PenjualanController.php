@@ -8,6 +8,7 @@ use App\Models\Produk;
 use App\Models\RiwayatStok;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use PDF;
 
 class PenjualanController extends Controller
@@ -19,13 +20,21 @@ class PenjualanController extends Controller
 
     public function data()
     {
-        $penjualan = Penjualan::with('member')->orderBy('id_penjualan', 'desc')->get();
-
+        $penjualan = Penjualan::with(['member' , 'detail_penjualan' => function($query){
+            $query->with('produk');
+        }])->orderBy('id_penjualan', 'desc')->get();
+        Log::info($penjualan);
         return datatables()
             ->of($penjualan)
             ->addIndexColumn()
             ->addColumn('total_item', function ($penjualan) {
                 return format_uang($penjualan->total_item);
+            })
+            ->addColumn('kode_transaksi', function ($penjualan) {
+                return tambah_nol_didepan($penjualan->id_penjualan , 10);
+            })
+            ->addColumn('kode_barang', function ($penjualan) {
+                return $penjualan->detail_penjualan->produk->kode_produk ?? '';
             })
             ->addColumn('total_harga', function ($penjualan) {
                 return 'Rp. '. format_uang($penjualan->total_harga);
@@ -165,7 +174,6 @@ class PenjualanController extends Controller
         $detail = PenjualanDetail::with('produk')
             ->where('id_penjualan', session('id_penjualan'))
             ->get();
-        
         return view('penjualan.nota_kecil', compact('setting', 'penjualan', 'detail'));
     }
 
