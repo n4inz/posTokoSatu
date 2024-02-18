@@ -81,12 +81,12 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Grafik Penjualan 2019 s/d 2024</h3>
                 <select name="" id="change_grafik">
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
                     <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
                 </select>
                 {{-- <h3 class="box-title">Grafik Penjualan {{ tanggal_indonesia($tanggal_awal, false) }} s/d {{ tanggal_indonesia($tanggal_akhir, false) }}</h3> --}}
             </div>
@@ -163,13 +163,23 @@ $(function() {
     }
 
     // Objek untuk menyimpan data grafik
+    // var chartData = {
+    //     '2019': @json($totalPenjualanArray2019),
+    //     // '2019': generateRandomData(5000000, 30000000, 12), // Data acak antara 5 juta dan 30 juta untuk setiap bulan
+    //     '2020': generateRandomData(5000000, 31000000, 12),
+    //     '2021': generateRandomData(6000000, 32000000, 12),
+    //     '2022': generateRandomData(6000000, 33000000, 12),
+    //     '2023': generateRandomData(7000000, 34000000, 12),
+    //     '2024': @json($totalPenjualanArray2024)
+    // };
+
     var chartData = {
-        '2019': generateRandomData(5000000, 30000000, 12), // Data acak antara 5 juta dan 30 juta untuk setiap bulan
-        '2020': generateRandomData(5000000, 31000000, 12),
-        '2021': generateRandomData(6000000, 32000000, 12),
-        '2022': generateRandomData(6000000, 33000000, 12),
-        '2023': generateRandomData(7000000, 34000000, 12),
-        '2024': generateRandomData(7000000, 35000000, 12)
+        '2024': @json($totalPenjualanArray2024),
+        '2023': @json($totalPenjualanArray2023),
+        '2022': @json($totalPenjualanArray2022),
+        '2021': @json($totalPenjualanArray2021),
+        '2020': @json($totalPenjualanArray2020),
+        '2019': @json($totalPenjualanArray2019),
     };
     
     const ctx = document.getElementById('salesChart');
@@ -180,7 +190,7 @@ $(function() {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul' ,'Agus', 'Sept' ,'Okt' ,'Nov', 'Dec'],
             datasets: [{
                 label: 'Penjualan',
-                data: chartData['2019'], // Data untuk tahun 2019
+                data: chartData['2024'], // Data untuk tahun 2019
                 borderWidth: 1
             }]
         },

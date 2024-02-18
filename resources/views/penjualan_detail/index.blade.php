@@ -3,7 +3,6 @@
 @section('title')
     Transaksi Penjualan
 @endsection
-
 @push('css')
 <style>
     .tampil-bayar {
